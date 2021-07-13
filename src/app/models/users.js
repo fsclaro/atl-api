@@ -30,6 +30,7 @@ const UserSchema = new mongodb.Schema({
     type: mongodb.Schema.Types.ObjectId,
     ref: 'Task',
     required: false,
+    autopopulate: true,
   },
   createdAt: {
     type: Date,
@@ -43,6 +44,8 @@ UserSchema.pre('save', async function (next) {
 
   next();
 });
+
+UserSchema.plugin(require('mongoose-autopopulate'));
 
 const User = mongodb.model('User', UserSchema);
 

@@ -111,7 +111,6 @@ router.post('/forgot_password', async (req, res) => {
 
     mailer.sendMail(mail, (err) => {
       if (err) {
-        console.log(err);
         return res.status(400).send({ error: 'Erro ao enviar o e-mail de recuperação de senha.' });
       }
      });

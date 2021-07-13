@@ -10,7 +10,9 @@ router.use(authMiddleware);
 // get all tasks
 router.get('/', async (req, res) => {
   try {
-    const tasks = await Task.find().populate('user');
+    const tasks = await Task.find({deletedAt: null })
+      .populate('user')
+      .sort({ createdAt: -1 });
 
     return res.send({ tasks });
   } catch (error) {
@@ -56,6 +58,55 @@ router.post('/', async (req, res) => {
   }
 });
 
+// close any task
+router.put('/close/:taskId', async (req, res) => {
+  try {
+    const { completed, completedAt } = req.body;
+    const taskId = req.params.taskId;
+
+    const updateTask = {
+      completed: completed,
+      completedAt: completedAt,
+    };
+
+    const task = await Task.findByIdAndUpdate(taskId,
+      updateTask,
+      { new: true }
+    );
+
+    task.save();
+
+    return res.send({ task });
+  } catch (error) {
+    return res.status(400).send({ error: 'Erro na atualização da tarefa.\n' + error.message });
+  }
+});
+
+// softdelete any task
+router.put('/softdelete/:taskId', async (req, res) => {
+  try {
+    const { deletedAt } = req.body;
+    const taskId = req.params.taskId;
+
+    const updateTask = {
+      deletedAt: deletedAt,
+    };
+
+    const task = await Task.findByIdAndUpdate(taskId,
+      updateTask,
+      { new: true }
+    );
+
+    task.save();
+
+    return res.send({ task });
+  } catch (error) {
+    return res.status(400).send({ error: 'Erro na atualização da tarefa.\n' + error.message });
+  }
+});
+
+
+
 // update any task
 router.put('/:taskId', async (req, res) => {
   try {
@@ -78,6 +129,7 @@ router.put('/:taskId', async (req, res) => {
 // delete any task
 router.delete('/:taskId', async (req, res) => {
   const { taskId } = req.params;
+
   try {
     await Task.findByIdAndRemove(taskId);
 

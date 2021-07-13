@@ -9,6 +9,7 @@ const TaskSchema = new mongodb.Schema({
     type: mongodb.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
+    autopopulate: true,
   },
   completed: {
     type: Boolean,
@@ -24,7 +25,13 @@ const TaskSchema = new mongodb.Schema({
     type: Date,
     default: Date.now,
   },
+  deletedAt: {
+    type: Date,
+    require: false
+  }
 });
+
+TaskSchema.plugin(require('mongoose-autopopulate'));
 
 const Task = mongodb.model('Task', TaskSchema);
 
