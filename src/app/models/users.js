@@ -26,10 +26,15 @@ const UserSchema = new mongodb.Schema({
     type: Date,
     select: false,
   },
+  tasks: {
+    type: mongodb.Schema.Types.ObjectId,
+    ref: 'Task',
+    required: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 UserSchema.pre('save', async function (next) {

@@ -15,6 +15,11 @@ const TaskSchema = new mongodb.Schema({
     require: true,
     default: false
   },
+  completedUntil: {
+    type: Date,
+    require: true,
+    default: null,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
