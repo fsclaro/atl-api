@@ -29,16 +29,15 @@ $ git clone https://github.com/fsclaro/atl-api.git
 Passo 2: Entre na pasta do projeto:
 
 ```bash
-$ cd alt-api
+$ cd atl-api
 ```
 
-Passo 3: Inicie o projeto conforme os passos descritos abaixo:
+Passo 3: instale as dependências do projeto conforme os passos descritos abaixo:
 
 ```bash
 # Instalar as dependências
 $ yarn
 ```
-O app estará disponível no seu browser pelo endereço http://localhost:3005.
 
 ## 💻 Configuração
 
@@ -53,6 +52,7 @@ Inicie o projeto conforme o passo descrito abaixo:
 ```bash
 $ yarn start
 ```
+A API estará disponível no seu browser pelo endereço http://localhost:3005.
 
 ## 📝 Licença
 
