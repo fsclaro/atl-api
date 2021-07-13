@@ -1,10 +1,6 @@
 <h1 align="center">Advanced TODO List - API Module</h1>
 
 <p align="center">
-  <img alt="Preview" src="./.github/Tela1.png" width="900px">
-</p>
-
-<p align="center">
   <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=8257E5&labelColor=000000">
 </p>
 
