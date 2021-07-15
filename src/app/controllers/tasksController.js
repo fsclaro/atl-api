@@ -9,10 +9,20 @@ router.use(authMiddleware);
 
 // get all tasks
 router.get('/', async (req, res) => {
+
+  const count = req.query.count;
+
+  let countRecord = 0
+  if (count !== undefined) {
+    countRecord = parseInt(count)
+  }
+
   try {
-    const tasks = await Task.find({deletedAt: null })
+    const tasks = await Task
+      .find({ deletedAt: null })
       .populate('user')
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .limit(countRecord);
 
     return res.send({ tasks });
   } catch (error) {
@@ -21,6 +31,7 @@ router.get('/', async (req, res) => {
       send({ error: 'Não foi possível buscar as tarefas.\n' + error.message });
   }
 });
+
 
 // get any task
 router.get('/:taskId', async (req, res) => {
