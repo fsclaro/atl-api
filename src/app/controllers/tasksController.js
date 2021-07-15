@@ -39,13 +39,14 @@ router.get('/:taskId', async (req, res) => {
 // create a new task
 router.post('/', async (req, res) => {
   try {
-    const { title, assignedTo, completedUntil, completedAt } = req.body;
+    const { title, assignedTo, completedUntil, completedAt, group } = req.body;
 
     const task = await Task.create({
       title: title,
       assignedTo: assignedTo,
       completedUntil: completedUntil,
       completedAt: completedAt,
+      group: group
     });
 
     task.save();

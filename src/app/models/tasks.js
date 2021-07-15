@@ -11,15 +11,18 @@ const TaskSchema = new mongodb.Schema({
     required: true,
     autopopulate: true,
   },
-  completed: {
-    type: Boolean,
-    require: true,
-    default: false
-  },
   completedUntil: {
     type: Date,
     require: true,
     default: null,
+  },
+  completed: {
+    type: Date,
+    require: false,
+  },
+  group: {
+    type: String,
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -27,8 +30,8 @@ const TaskSchema = new mongodb.Schema({
   },
   deletedAt: {
     type: Date,
-    require: false
-  }
+    require: false,
+  },
 });
 
 TaskSchema.plugin(require('mongoose-autopopulate'));
